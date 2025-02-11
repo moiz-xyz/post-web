@@ -21,6 +21,10 @@ const firebaseConfig = {
   appId: "1:339707830:web:6fbd5046d77d0474466317",
   measurementId: "G-HL3HWZFMR6"
 };
+
+
+
+
 // ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app); 
@@ -41,4 +45,3 @@ export {
   GoogleAuthProvider, 
   signInWithPopup 
 };
-export {db}
