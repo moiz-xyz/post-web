@@ -1,46 +1,38 @@
 import { auth, signOut, onAuthStateChanged } from "../firebase.js"; 
 
-let logoutBtn = document.getElementById('logoutBtn');
-
-// Logout functionality
 
 
-const logout = () => {
-    signOut(auth).then(() => {
-        Toastify({
-            text: "Logout successfully completed",
-            duration: 3000
-        }).showToast();
+document.addEventListener("DOMContentLoaded", () => {
+    // console.log("hello ");
+    
+    let logoutBtn = document.getElementById("logoutBtn");
 
-        window.location.href = "../Login/index.html";
-    }).catch((error) => {
-        Toastify({
-            text: "Logout Failed: " + error.message,
-            duration: 3000
-        }).showToast();
-    });
-};
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            signOut(auth)
+                .then(() => {
+                    Toastify({
+                        text: "Logout successfully completed",
+                        duration: 3000
+                    }).showToast();
 
-logoutBtn.addEventListener('click', logout);
+                    window.location.href = "../Login/index.html";
+                })
+                .catch((error) => {
+                    Toastify({
+                        text: "Logout Failed: " + error.message,
+                        duration: 3000
+                    }).showToast();
+                });
+        });
+    } else {
+        console.error("Logout button not found!");
+    }
+});
 
+// Redirect to login if user is not authenticated
 onAuthStateChanged(auth, (user) => {
     if (!user) {
         window.location.href = "../Login/index.html"; 
     }
 });
-
-
-import { auth, db } from "../firebase.js";
-
-import {
-  addDoc,
-  collection,
-  query,
-  where,
-  getDocs,
-  limit,
-  orderBy,
-  Timestamp,
-  doc,
-  getDoc,
-} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
